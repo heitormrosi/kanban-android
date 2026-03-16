@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Kanban</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="status_task_todo">A Fazer</string>
+    <string name="status_task_doing">Fazendo</string>
+    <string name="status_task_done">Feitas</string>
+    <string name="tabs_screenreader">Tabs</string>
+    <string name="exit_button_screenreader">Exit button</string>
 </resources>
