@@ -45,11 +45,13 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- Pra que serve isso? -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="30dp"
+        >
 
 
     </com.google.android.material.appbar.AppBarLayout>
