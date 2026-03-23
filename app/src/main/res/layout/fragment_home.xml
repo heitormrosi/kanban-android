@@ -7,52 +7,49 @@
     android:orientation="vertical"
     tools:context=".ui.HomeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ConstraintLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@color/color_default"
-            android:contentDescription="@string/tabs_screenreader"
-            android:elevation="0dp"
-            app:tabTextAppearance="@style/CustomTabLayout"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tabIndicatorColor="@color/white"
-            app:tabMode="scrollable"
-            app:tabPaddingEnd="24dp"
-            app:tabPaddingStart="24dp"
-            app:tabSelectedTextColor="@color/black"
-            app:tabTextColor="@color/white" />
-
-        <ImageButton
-            android:id="@+id/btnLogout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:background="@color/color_default"
-            android:padding="24dp"
-            android:src="@drawable/logoutic"
-            android:contentDescription="@string/exit_button_screenreader"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!-- Pra que serve isso? -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        >
+        android:layout_height="wrap_content">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ConstraintLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/color_default"
+                android:contentDescription="@string/tabs_screenreader"
+                android:elevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tabIndicatorColor="@color/white"
+                app:tabMode="scrollable"
+                app:tabPaddingEnd="24dp"
+                app:tabPaddingStart="24dp"
+                app:tabSelectedTextColor="@color/white"
+                app:tabTextAppearance="@style/CustomTabLayout"
+                app:tabTextColor="@color/white"
+                />
+
+            <ImageButton
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:background="@color/color_default"
+                android:contentDescription="@string/exit_button_screenreader"
+                android:padding="24dp"
+                android:src="@drawable/logoutic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 

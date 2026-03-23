@@ -18,15 +18,15 @@
             android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_back"
             android:paddingTop="40dp"
-            android:id="@+id/tempButtonBack">
-
+            android:id="@+id/toolbar">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Recuperar Conta"
                 android:textColor="@color/white"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="8dp"/>
 
         </com.google.android.material.appbar.MaterialToolbar>
         <LinearLayout
@@ -58,6 +58,7 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="4dp"
                 android:hint="Digite seu e-mail"
+                android:id="@+id/edittextEmail"
                 android:inputType="textEmailAddress"
                 android:padding="10dp"
                 android:background="@drawable/bg_edit_text"/>
@@ -70,7 +71,8 @@
                 android:textColor="@color/color_default"
                 app:backgroundTint="@null"
                 android:backgroundTint="@null"
-                android:background="@drawable/bg_btn"/>
+                android:background="@drawable/bg_btn"
+                android:id="@+id/buttonEnviar"/>
 
 
 

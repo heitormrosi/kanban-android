@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import dev.hmr.kanban.R
 import dev.hmr.kanban.databinding.FragmentLoginBinding
@@ -33,7 +34,7 @@ class LoginFragment : Fragment() {
         this._binding = null
     }
 
-    private fun initListeners(){
+    private fun initListeners() {
         this.binding.btnRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
@@ -43,7 +44,30 @@ class LoginFragment : Fragment() {
         }
 
         this.binding.buttonLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_global_homeFragment)
+            validateData()
         }
+    }
+
+    private fun validateData() {
+        val email = this.binding.edittextEmail.text.toString().trim()
+        val senha = this.binding.edittextSenha.text.toString().trim()
+
+        if (email.isBlank()) {
+            Toast.makeText(
+                requireContext(),
+                "Preencha seu email!",
+                Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (senha.isBlank()) {
+            Toast.makeText(
+                requireContext(),
+                "Preencha a senha!",
+                Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        findNavController().navigate(R.id.action_global_homeFragment)
     }
 }

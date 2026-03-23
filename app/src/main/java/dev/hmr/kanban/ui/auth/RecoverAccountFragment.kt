@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import dev.hmr.kanban.R
 import dev.hmr.kanban.databinding.FragmentRecoverAccountBinding
+import dev.hmr.kanban.util.initToolbar
 
 
 class RecoverAccountFragment : Fragment() {
@@ -28,16 +30,28 @@ class RecoverAccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initToolbar(this.binding.toolbar)
         initListeners()
     }
 
     private fun initListeners() {
-        /**
-         * (TEMP)ORÁRIO: para lidar com a seta de retorno.
-         **/
-        this.binding.tempButtonBack.setOnClickListener {
-            findNavController().navigateUp()
+        this.binding.buttonEnviar.setOnClickListener {
+            validateData()
         }
+    }
+
+    private fun validateData() {
+        val email = this.binding.edittextEmail.text.toString().trim()
+
+        if (email.isBlank()) {
+            Toast.makeText(
+                requireContext(),
+                "Preencha seu email!",
+                Toast.LENGTH_SHORT).show()
+            return
+        }
+
+
     }
 
     override fun onDestroyView() {
