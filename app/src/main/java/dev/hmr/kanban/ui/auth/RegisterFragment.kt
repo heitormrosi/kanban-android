@@ -1,15 +1,14 @@
 package dev.hmr.kanban.ui.auth
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
 import dev.hmr.kanban.R
 import dev.hmr.kanban.databinding.FragmentRegisterBinding
 import dev.hmr.kanban.util.initToolbar
+import dev.hmr.kanban.util.showBottomSheet
 
 
 class RegisterFragment : Fragment() {
@@ -17,13 +16,10 @@ class RegisterFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         this._binding = FragmentRegisterBinding.inflate(
-            inflater,
-            container,
-            false
+            inflater, container, false
         )
         return this.binding.root
     }
@@ -45,20 +41,18 @@ class RegisterFragment : Fragment() {
         val senha = this.binding.edittextSenha.text.toString().trim()
 
         if (email.isBlank()) {
-            Toast.makeText(
-                requireContext(),
-                "Preencha seu email!",
-                Toast.LENGTH_SHORT
-            ).show()
+            showBottomSheet(
+                null,
+                null,
+                R.string.email_empty_register_fragment)
             return
         }
 
         if (senha.isBlank()) {
-            Toast.makeText(
-                requireContext(),
-                "Preencha a senha!",
-                Toast.LENGTH_SHORT
-            ).show()
+            showBottomSheet(
+                null,
+                null,
+                R.string.password_empty_register_fragment)
             return
         }
 

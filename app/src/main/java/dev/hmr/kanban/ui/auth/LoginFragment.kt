@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import dev.hmr.kanban.R
 import dev.hmr.kanban.databinding.FragmentLoginBinding
+import dev.hmr.kanban.util.showBottomSheet
 
 
 class LoginFragment : Fragment() {
@@ -53,18 +53,12 @@ class LoginFragment : Fragment() {
         val senha = this.binding.edittextSenha.text.toString().trim()
 
         if (email.isBlank()) {
-            Toast.makeText(
-                requireContext(),
-                "Preencha seu email!",
-                Toast.LENGTH_SHORT).show()
+            showBottomSheet(null, null, R.string.email_empty)
             return
         }
 
         if (senha.isBlank()) {
-            Toast.makeText(
-                requireContext(),
-                "Preencha a senha!",
-                Toast.LENGTH_SHORT).show()
+            showBottomSheet(null, null, R.string.password_empty)
             return
         }
 

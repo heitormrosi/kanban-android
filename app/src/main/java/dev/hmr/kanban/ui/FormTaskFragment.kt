@@ -5,11 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import dev.hmr.kanban.R
 import dev.hmr.kanban.databinding.FragmentFormTaskBinding
-import dev.hmr.kanban.databinding.FragmentRegisterBinding
 import dev.hmr.kanban.util.initToolbar
+import dev.hmr.kanban.util.showBottomSheet
 
 
 class FormTaskFragment : Fragment() {
@@ -44,11 +43,10 @@ class FormTaskFragment : Fragment() {
         val descricao = this.binding.editTextDescricao.text.toString().trim()
 
         if (descricao.isBlank()) {
-            Toast.makeText(
-                requireContext(),
-                "Preencha uma descrição!",
-                Toast.LENGTH_SHORT
-            ).show()
+            showBottomSheet(
+                null,
+                null,
+                R.string.description_empty_form_task_fragment)
             return
         }
 

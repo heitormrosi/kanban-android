@@ -5,11 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import dev.hmr.kanban.R
 import dev.hmr.kanban.databinding.FragmentRecoverAccountBinding
 import dev.hmr.kanban.util.initToolbar
+import dev.hmr.kanban.util.showBottomSheet
 
 
 class RecoverAccountFragment : Fragment() {
@@ -44,10 +43,7 @@ class RecoverAccountFragment : Fragment() {
         val email = this.binding.edittextEmail.text.toString().trim()
 
         if (email.isBlank()) {
-            Toast.makeText(
-                requireContext(),
-                "Preencha seu email!",
-                Toast.LENGTH_SHORT).show()
+            showBottomSheet(null, null, R.string.email_empty)
             return
         }
 
