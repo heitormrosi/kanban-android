@@ -44,7 +44,7 @@ class RegisterFragment : Fragment() {
             showBottomSheet(
                 null,
                 null,
-                R.string.email_empty_register_fragment)
+                getString(R.string.email_empty_register_fragment))
             return
         }
 
@@ -52,7 +52,7 @@ class RegisterFragment : Fragment() {
             showBottomSheet(
                 null,
                 null,
-                R.string.password_empty_register_fragment)
+                getString(R.string.password_empty_register_fragment))
             return
         }
 

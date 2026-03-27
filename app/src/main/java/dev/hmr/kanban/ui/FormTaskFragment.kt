@@ -46,7 +46,7 @@ class FormTaskFragment : Fragment() {
             showBottomSheet(
                 null,
                 null,
-                R.string.description_empty_form_task_fragment)
+                getString(R.string.description_empty_form_task_fragment))
             return
         }
 

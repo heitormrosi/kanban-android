@@ -1,15 +1,18 @@
 <resources>
     <string name="app_name">Kanban</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Leitores de tela -->
     <string name="tabs_screenreader">Tabs</string>
     <string name="exit_button_screenreader">Exit button</string>
+    <string name="text_splash_icon_screenreader">Splash icon</string>
+    <string name="text_add_task_screenreader">Add task</string>
 
     <!-- Estado de tarefas -->
     <string name="status_task_todo">A Fazer</string>
     <string name="status_task_doing">Fazendo</string>
     <string name="status_task_done">Feitas</string>
+    <string name="hint_edit_email">Digite seu e-mail</string>
+    <string name="hint_edit_password">Digite sua senha</string>
 
     <!-- Genéricos -->
     <string name="email_empty">Preencha seu email!</string>
@@ -17,11 +20,31 @@
     <string name="text_title_warning">Atenção</string>
     <string name="text_button_warning">Entendi</string>
     <string name="text_message_warning">Mensagem</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="password_text">Senha!</string>
+    <string name="email_text">E-mail</string>
 
     <!-- Fragmento de registro -->
     <string name="email_empty_register_fragment">Preencha um e-mail válido.</string>
     <string name="password_empty_register_fragment">Preencha uma senha.</string>
+    <string name="text_button_register_fragment">Enviar</string>
+    <string name="text_title_toolbar_register_fragment">Criar conta</string>
+
+    <!-- Fragmento de login -->
+    <string name="text_title_login_fragment">Login</string>
+    <string name="text_button_register_login_fragment">Criar conta</string>
+    <string name="text_button_recover_login_fragment">Recuperar conta</string>
+
+    <!-- Framento de recuperar conta -->
+    <string name="text_info_recover_account_fragment">Informe seu email de cadastro para receber \n um link para alteração de senha.</string>
+    <string name="text_title_toolbar_recover_account_fragment">Recuperar conta</string>
+    <string name="text_button_recover_account_fragment">Enviar</string>
 
     <!-- Fragmento de adição de tarefa -->
     <string name="description_empty_form_task_fragment">Preencha uma descrição.</string>
+    <string name="text_title_form_task_fragment">Adicionar tarefa</string>
+    <string name="text_edit_description_form_task_fragment">Descrição</string>
+    <string name="hint_edit_description_form_task_fragment">Informe sua nova tarefa</string>
+    <string name="text_edit_status_form_task_fragment">Status</string>
+    <string name="text_button_save_form_task_fragment">Salvar</string>
 </resources>

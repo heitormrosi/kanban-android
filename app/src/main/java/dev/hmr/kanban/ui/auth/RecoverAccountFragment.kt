@@ -43,7 +43,7 @@ class RecoverAccountFragment : Fragment() {
         val email = this.binding.edittextEmail.text.toString().trim()
 
         if (email.isBlank()) {
-            showBottomSheet(null, null, R.string.email_empty)
+            showBottomSheet(null, null, getString(R.string.email_empty))
             return
         }
 

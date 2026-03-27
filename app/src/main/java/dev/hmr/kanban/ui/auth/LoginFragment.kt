@@ -53,12 +53,12 @@ class LoginFragment : Fragment() {
         val senha = this.binding.edittextSenha.text.toString().trim()
 
         if (email.isBlank()) {
-            showBottomSheet(null, null, R.string.email_empty)
+            showBottomSheet(null, null, getString(R.string.email_empty))
             return
         }
 
         if (senha.isBlank()) {
-            showBottomSheet(null, null, R.string.password_empty)
+            showBottomSheet(null, null, getString(R.string.password_empty))
             return
         }
 

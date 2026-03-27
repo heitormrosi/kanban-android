@@ -4,32 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_default"
     android:fillViewport="true"
     android:padding="20dp"
     tools:context=".ui.FormTaskFragment">
 
     <LinearLayout
+        android:id="@+id/linearlayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/linearlayout1">
+        android:orientation="vertical">
 
         <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:navigationIcon="@drawable/ic_back"
             android:paddingTop="40dp"
-            android:id="@+id/toolbar">
+            app:navigationIcon="@drawable/ic_back">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Recuperar Conta"
-                android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"
-                android:paddingTop="8dp"/>
+                android:paddingTop="8dp"
+                android:text="@string/text_title_form_task_fragment"
+                android:textColor="@color/white" />
 
         </com.google.android.material.appbar.MaterialToolbar>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -39,7 +41,7 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Descrição"
+                android:text="@string/text_edit_description_form_task_fragment"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -48,18 +50,20 @@
                 android:id="@+id/editTextDescricao"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/bg_edit_text"
-                android:hint="Informe sua nova tarefa"
+                android:autofillHints=""
+                android:hint="@string/hint_edit_description_form_task_fragment"
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView" />
+                app:layout_constraintTop_toBottomOf="@id/textView"
+                style="@style/EditTextTheme" />
 
             <TextView
                 android:id="@+id/textViewStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Status"
+                android:text="@string/text_edit_status_form_task_fragment"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/editTextDescricao" />
@@ -80,27 +84,27 @@
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/black"
                     android:checked="true"
-                    android:text="A Fazer"
+                    android:text="@string/status_task_todo"
                     android:textColor="@color/white"
-                    android:theme="@style/MyRadioButton" />
+                    style="@style/MyRadioButton" />
 
                 <RadioButton
                     android:id="@+id/rbDoing"
                     android:layout_width="88dp"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/black"
-                    android:text="Fazendo"
+                    android:text="@string/status_task_doing"
                     android:textColor="@color/white"
-                    android:theme="@style/MyRadioButton" />
+                    style="@style/MyRadioButton" />
 
                 <RadioButton
                     android:id="@+id/rbDone"
                     android:layout_width="88dp"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/black"
-                    android:text="Feita"
+                    android:text="@string/status_task_done"
                     android:textColor="@color/white"
-                    android:theme="@style/MyRadioButton" />
+                    style="@style/MyRadioButton" />
             </RadioGroup>
 
             <com.google.android.material.button.MaterialButton
@@ -108,34 +112,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/bg_btn"
-                app:backgroundTint="@null"
-                android:text="Salvar"
-                android:textAllCaps="false"
-                android:textColor="@color/color_default"
+                android:text="@string/text_button_save_form_task_fragment"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/radioGroup"
-                />
+                style="@style/ButtomTheme" />
 
             <ProgressBar
+                android:id="@+id/progressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/progressBar"
-                android:layout_marginTop="8dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="8dp"
                 android:indeterminateTint="@color/white"
                 android:visibility="invisible"
-                tools:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/buttonSave"
-                />
+                tools:visibility="visible" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-
 
 
 </ScrollView>
