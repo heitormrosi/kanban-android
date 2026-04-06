@@ -21,7 +21,7 @@
     <string name="text_button_warning">Entendi</string>
     <string name="text_message_warning">Mensagem</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="password_text">Senha!</string>
+    <string name="password_text">Senha</string>
     <string name="email_text">E-mail</string>
 
     <!-- Fragmento de registro -->
@@ -47,4 +47,11 @@
     <string name="hint_edit_description_form_task_fragment">Informe sua nova tarefa</string>
     <string name="text_edit_status_form_task_fragment">Status</string>
     <string name="text_button_save_form_task_fragment">Salvar</string>
+
+    <!-- Visão das tarefas -->
+    <string name="screenreader_anterior">Anterior</string>
+    <string name="remove_task_button">Remover</string>
+    <string name="edit_text_button">Editar</string>
+    <string name="details_task_button">Detalhes</string>
+    <string name="screenreader_proximo">Próximo</string>
 </resources>
