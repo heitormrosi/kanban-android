@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dev.hmr.kanban.R
 import dev.hmr.kanban.data.model.Status
@@ -13,9 +15,8 @@ import dev.hmr.kanban.databinding.ItemTaskBinding
 
 class TaskAdapter(
     private val context: Context,
-    private val taskList: List<Task>,
     private val taskSelected: (Task, Int) -> Unit
-) : RecyclerView.Adapter<TaskAdapter.MyViewHolder>() {
+) : ListAdapter<Task, TaskAdapter.MyViewHolder>(DIFF_CALBACK) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -25,14 +26,14 @@ class TaskAdapter(
             parent,
             false
         )
-        return this.MyViewHolder(binding)
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(
         holder: MyViewHolder,
         position: Int
     ) {
-        val task = this.taskList[position]
+        val task = getItem(position)
         holder.binding.textDescription.text = task.description
 
         setIndicators(task, holder)
@@ -80,11 +81,20 @@ class TaskAdapter(
         val SELECT_EDIT: Int = 3
         val SELECT_DETAILS: Int = 4
         val SELECT_NEXT: Int = 5
+
+        private val DIFF_CALBACK = object : DiffUtil.ItemCallback<Task>() {
+            override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
+                return oldItem.id == newItem.id && oldItem.description == newItem.description
+            }
+
+            override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
+                return oldItem == newItem && oldItem.description == newItem.description
+            }
+        }
     }
 
-    override fun getItemCount(): Int = this.taskList.size
 
 
-    inner class MyViewHolder(val binding: ItemTaskBinding) :
-        RecyclerView.ViewHolder(binding.root) {}
+    class MyViewHolder(val binding: ItemTaskBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }

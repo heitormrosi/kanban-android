@@ -1,17 +1,15 @@
 package dev.hmr.kanban.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import dev.hmr.kanban.R
 import dev.hmr.kanban.data.model.Status
 import dev.hmr.kanban.data.model.Task
 import dev.hmr.kanban.databinding.FragmentDoneBinding
-import dev.hmr.kanban.databinding.FragmentSplashBinding
 import dev.hmr.kanban.ui.adapter.TaskAdapter
 
 class DoneFragment : Fragment() {
@@ -35,18 +33,21 @@ class DoneFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initRecyclerViewTask(getTasks())
+        this.initRecyclerViewTask()
+        this.getTask()
     }
 
-    private fun initRecyclerViewTask(taskList: List<Task>) {
+    private fun initRecyclerViewTask() {
         this.taskAdapter =
-            TaskAdapter(requireContext(), taskList) { task, option -> optionSelected(task, option) }
+            TaskAdapter(requireContext()) { task, option -> optionSelected(task, option) }
 
-        this.binding.recyclerViewTask.layoutManager = LinearLayoutManager(requireContext())
-        this.binding.recyclerViewTask.setHasFixedSize(true)
-
-        this.binding.recyclerViewTask.adapter = this.taskAdapter
+        with(this.binding.recyclerViewTask) {
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+            adapter = taskAdapter
+        }
     }
+
 
     private fun optionSelected(task: Task, option: Int) {
         when (option) {
@@ -65,13 +66,17 @@ class DoneFragment : Fragment() {
         }
     }
 
-    private fun getTasks() = listOf(
-        Task("0", "Pedir cachorro quente", Status.DONE),
-        Task("1", "Subir de DEV para PROD", Status.DONE),
-        Task("2", "Reiniciar servidor", Status.DONE),
-        Task("3", "Carregar bateria", Status.DONE),
-        Task("4", "Mandar e-mail pro chefe", Status.DONE)
-    )
+    private fun getTask() {
+        val taskList: List<Task> = listOf(
+            Task("0", "Pedir cachorro quente", Status.DONE),
+            Task("1", "Subir de DEV para PROD", Status.DONE),
+            Task("2", "Reiniciar servidor", Status.DONE),
+            Task("3", "Carregar bateria", Status.DONE),
+            Task("4", "Mandar e-mail pro chefe", Status.DONE)
+        )
+
+        this.taskAdapter.submitList(taskList)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
