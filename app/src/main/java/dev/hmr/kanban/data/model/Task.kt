@@ -1,11 +1,12 @@
 package dev.hmr.kanban.data.model
 
+import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+
 
 @Parcelize
 data class Task(
-    val id: String,
-    val description: String,
-    val status: Status = Status.TODO
+    var id: String = "",
+    var description: String = "",
+    var status: Status = Status.TODO
 ) : Parcelable

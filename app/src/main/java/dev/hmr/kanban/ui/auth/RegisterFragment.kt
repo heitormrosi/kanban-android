@@ -32,6 +32,9 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        this.auth = FirebaseAuth.getInstance()
+
         initToolbar(this.binding.toolbar)
         initListeners()
     }
@@ -65,18 +68,20 @@ class RegisterFragment : Fragment() {
         }
 
         this.binding.registeringProgressBar.isVisible = true
+
+        registerUser(email, senha)
     }
 
     private fun registerUser(email: String, password: String) {
         try {
-            this.auth = FirebaseAuth.getInstance()
+
 
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
+                    this.binding.registeringProgressBar.isVisible = false
                     if (task.isSuccessful) {
                         findNavController().navigate(R.id.action_global_homeFragment)
                     } else {
-                        this.binding.registeringProgressBar.isVisible = false
                         Toast.makeText(
                             requireContext(),
                             task.exception?.message,
@@ -85,6 +90,7 @@ class RegisterFragment : Fragment() {
                     }
                 }
         } catch (e: Exception) {
+            this.binding.registeringProgressBar.isVisible = false
             Toast.makeText(
                 requireContext(),
                 e.message.toString(),

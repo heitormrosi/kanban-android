@@ -79,10 +79,10 @@ class LoginFragment : Fragment() {
         try {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
+                    binding.progressBar.isVisible = false
                     if (task.isSuccessful) {
                         findNavController().navigate(R.id.action_global_homeFragment)
                     } else {
-                        binding.progressBar.isVisible = false
                         Toast.makeText(
                             requireContext(),
                             task.exception?.message,
