@@ -30,6 +30,11 @@
     <string name="text_button_register_fragment">Enviar</string>
     <string name="text_title_toolbar_register_fragment">Criar conta</string>
 
+    <!-- Fragmento de início -->
+    <string name="text_title_dialog_confirm_logout">Deseja sair da sua conta?</string>
+    <string name="text_button_dialog_confirm_logout">Confirmar</string>
+    <string name="text_message_dialog_confirm_logout">Aperte em confirmar para sair da sua conta</string>
+
     <!-- Fragmento de login -->
     <string name="text_title_login_fragment">Login</string>
     <string name="text_button_register_login_fragment">Criar conta</string>
@@ -39,6 +44,7 @@
     <string name="text_info_recover_account_fragment">Informe seu email de cadastro para receber \n um link para alteração de senha.</string>
     <string name="text_title_toolbar_recover_account_fragment">Recuperar conta</string>
     <string name="text_button_recover_account_fragment">Enviar</string>
+    <string name="text_message_recover_account_fragment">Um e-mail foi enviado para recuperar a senha.</string>
 
     <!-- Fragmento de adição de tarefa -->
     <string name="description_empty_form_task_fragment">Preencha uma descrição.</string>
