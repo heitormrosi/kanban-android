@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -32,6 +33,8 @@ class FormTaskFragment : Fragment() {
     private lateinit var reference: DatabaseReference
     private lateinit var auth: FirebaseAuth
 
+    private val args: FormTaskFragmentArgs by navArgs()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,8 +53,36 @@ class FormTaskFragment : Fragment() {
         this.auth = Firebase.auth
         this.reference = Firebase.database.reference
 
-        initToolbar(this.binding.toolbar)
-        initListeners()
+        this.initToolbar(this.binding.toolbar)
+
+        this.getArgs()
+        this.initListeners()
+    }
+
+    private fun configTask() {
+        this.newTask = false
+        this.status = task.status
+        this.binding.textToolbar.setText(R.string.text_toolbar_update_form_task_fragment)
+        this.binding.editTextDescricao.setText(task.description)
+        this.setStatus()
+    }
+
+    private fun setStatus() {
+        val id = when (task.status) {
+            Status.TODO -> R.id.rbTodo
+            Status.DOING -> R.id.rbDoing
+            else -> R.id.rbDone
+        }
+        this.binding.radioGroup.check(id)
+    }
+
+    private fun getArgs() {
+        this.args.task.let {
+            if(it != null) {
+                this.task = it
+                this.configTask()
+            }
+        }
     }
 
     private fun initListeners() {
@@ -84,6 +115,12 @@ class FormTaskFragment : Fragment() {
                     if (newTask) {
                         findNavController().popBackStack()
                     } else {
+                        Toast.makeText(
+                            requireContext(),
+                            R.string.text_update_sucess_form_task_fragment,
+                            Toast.LENGTH_SHORT
+                        ).show()
+
                         binding.progressBar.isVisible = false
                     }
                 } else {
@@ -107,8 +144,11 @@ class FormTaskFragment : Fragment() {
 
         this.binding.progressBar.isVisible = true
 
-        if (newTask) this.task = Task()
-        this.task.id = reference.database.reference.push().key ?: ""
+        if(this.newTask) {
+            this.task = Task()
+            this.task.id = this.reference.database.reference.push().key ?: ""
+        }
+
         this.task.description = descricao
         this.task.status = this.status
 

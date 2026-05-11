@@ -31,6 +31,13 @@
     <string name="text_message_dialog_delete">Aperte em confirmar para remover a tarefa.</string>
     <string name="text_button_dialog_confirm">Confirmar</string>
 
+    <string name="text_toolbar_update_form_task_fragment">
+        Editando tarefa...
+    </string>
+    <string name="text_update_sucess_form_task_fragment">
+        Tarefa atualizada com sucesso!
+    </string>
+
     <string name="text_title_login_fragment">Login</string>
     <string name="text_button_register_login_fragment">Criar conta</string>
     <string name="text_button_recover_login_fragment">Recuperar conta</string>

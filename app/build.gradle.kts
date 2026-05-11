@@ -3,8 +3,11 @@ import com.android.build.api.dsl.ApplicationExtension
 plugins {
     alias(libs.plugins.android.application)
     // alias(libs.plugins.kotlin.android)
+
     id("kotlin-parcelize")
     id("com.google.gms.google-services")
+
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 configure<ApplicationExtension> {
