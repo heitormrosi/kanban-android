@@ -74,8 +74,6 @@ class RegisterFragment : Fragment() {
 
     private fun registerUser(email: String, password: String) {
         try {
-
-
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     this.binding.registeringProgressBar.isVisible = false

@@ -21,6 +21,15 @@
     <string name="hint_edit_password">Digite sua senha</string>
     <string name="error_generic">Ocorreu um erro, tente novamente mais tarde.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_list_task_empty">
+        Nenhuma tarefa cadastrada!
+    </string>
+    <string name="text_list_task_load">Aguarde, estamos carregando as informações!</string>
+    <string name="text_delete_success_task">Tarefa removida com sucesso.</string>
+
+    <string name="text_title_dialog_delete">Deseja remover esta tarefa?</string>
+    <string name="text_message_dialog_delete">Aperte em confirmar para remover a tarefa.</string>
+    <string name="text_button_dialog_confirm">Confirmar</string>
 
     <string name="text_title_login_fragment">Login</string>
     <string name="text_button_register_login_fragment">Criar conta</string>
