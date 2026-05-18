@@ -95,16 +95,12 @@ class FormTaskFragment : Fragment() {
 
     private fun saveTask() {
         val userId = FirebaseHelper.getIdUser()
-        if (userId == null) {
-            showBottomSheet(message = "Ocorreu um erro! Por favor tente novamente mais tarde.")
-            return
-        }
 
         binding.progressBar.isVisible = true
 
         FirebaseHelper.getDatabase()
             .child("task")
-            .child(FirebaseHelper.getAuth().currentUser?.uid ?: "")
+            .child(FirebaseHelper.getIdUser())
             .child(task.id)
             .setValue(task).addOnCompleteListener { result ->
                 if (result.isSuccessful) {
@@ -114,9 +110,7 @@ class FormTaskFragment : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
 
-                    if (newTask) {
-                        findNavController().popBackStack()
-                    } else {
+                    if (!newTask) {
                         Toast.makeText(
                             requireContext(),
                             R.string.text_update_sucess_form_task_fragment,
@@ -124,9 +118,11 @@ class FormTaskFragment : Fragment() {
                         ).show()
 
                         this.viewModel.setUpdateTask(task)
-                        binding.progressBar.isVisible = false
-                        findNavController().popBackStack()
+
                     }
+
+                    binding.progressBar.isVisible = false
+                    findNavController().popBackStack()
                 } else {
                     binding.progressBar.isVisible = false
                     showBottomSheet(message = getString(R.string.error_generic))
