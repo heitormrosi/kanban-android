@@ -7,20 +7,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.database
 import dev.hmr.kanban.R
+import dev.hmr.kanban.data.model.Status
 import dev.hmr.kanban.data.model.Task
 import dev.hmr.kanban.databinding.FragmentTodoBinding
 import dev.hmr.kanban.ui.adapter.TaskAdapter
+import dev.hmr.kanban.util.FirebaseHelper
 import dev.hmr.kanban.util.showBottomSheet
 
 
@@ -28,10 +26,9 @@ class TodoFragment : Fragment() {
     private var _binding: FragmentTodoBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var reference: DatabaseReference
-    private lateinit var auth: FirebaseAuth
-
     private lateinit var taskAdapter: TaskAdapter
+
+    private val viewModel: TaskViewModel by activityViewModels<TaskViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,9 +45,6 @@ class TodoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        this.auth = Firebase.auth
-        this.reference = Firebase.database.reference
-
         this.initListeners()
 
         this.getTask()
@@ -63,6 +57,8 @@ class TodoFragment : Fragment() {
             val action = HomeFragmentDirections.actionHomeFragmentToFormTaskFragment(null)
             findNavController().navigate(action)
         }
+
+        this.observeViewModel()
     }
 
     private fun initRecyclerViewTask() {
@@ -73,6 +69,25 @@ class TodoFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
             adapter = taskAdapter
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.taskUpdate.observe(viewLifecycleOwner) { updateTask ->
+            if (updateTask.status == Status.TODO) {
+                val oldList = taskAdapter.currentList
+
+                val newList = oldList.toMutableList().apply {
+                    find { it.id == updateTask.id }?.description = updateTask.description
+                }
+
+                val position = newList.indexOfFirst { it.id == updateTask.id }
+
+                taskAdapter.submitList(newList)
+
+                taskAdapter.notifyItemChanged(position)
+
+            }
         }
     }
 
@@ -106,9 +121,9 @@ class TodoFragment : Fragment() {
     }
 
     private fun getTask() {
-        this.reference
+        FirebaseHelper.getDatabase()
             .child("task")
-            .child(this.auth.currentUser?.uid ?: "")
+            .child(FirebaseHelper.getAuth().currentUser?.uid ?: "")
             .orderByChild("status")
             .equalTo("TODO")
             .addValueEventListener(object : ValueEventListener {
@@ -141,9 +156,9 @@ class TodoFragment : Fragment() {
     }
 
     private fun deleteTask(task: Task) {
-        reference
+        FirebaseHelper.getDatabase()
             .child("task")
-            .child(auth.currentUser?.uid ?: "")
+            .child(FirebaseHelper.getAuth().currentUser?.uid ?: "")
             .child(task.id)
             .removeValue().addOnCompleteListener { result ->
                 if (result.isSuccessful) {

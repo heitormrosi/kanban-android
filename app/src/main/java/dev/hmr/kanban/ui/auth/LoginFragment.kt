@@ -8,9 +8,10 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import dev.hmr.kanban.R
 import dev.hmr.kanban.databinding.FragmentLoginBinding
+import dev.hmr.kanban.util.FirebaseHelper
+import dev.hmr.kanban.util.hideKeyboard
 import dev.hmr.kanban.util.showBottomSheet
 
 
@@ -18,7 +19,6 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = this._binding!!
 
-    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,8 +30,6 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        this.auth = FirebaseAuth.getInstance()
 
         initListeners()
     }
@@ -70,6 +68,8 @@ class LoginFragment : Fragment() {
             return
         }
 
+        hideKeyboard()
+
         this.binding.progressBar.isVisible = true
 
         loginUser(email, senha)
@@ -77,17 +77,13 @@ class LoginFragment : Fragment() {
 
     private fun loginUser(email: String, password: String) {
         try {
-            auth.signInWithEmailAndPassword(email, password)
+            FirebaseHelper.getAuth().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     binding.progressBar.isVisible = false
                     if (task.isSuccessful) {
                         findNavController().navigate(R.id.action_global_homeFragment)
                     } else {
-                        Toast.makeText(
-                            requireContext(),
-                            task.exception?.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        showBottomSheet(message = getString(FirebaseHelper.validError(error = task.exception?.message.toString())))
                     }
                 }
         } catch (e: Exception) {

@@ -3,22 +3,16 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="green">#00FF00</color>
-    <color name="color_default">#03B6FC</color>
+    <color name="color_default">#135D29</color>
     <color name="color_delete">
         #FF4C3B
     </color>
-    <color name="color_details">
-        #04D5C1
-    </color>
+    <color name="color_details">#038E82</color>
 
     <color
         name="color_status_todo"
-        >
-        #FF841A
-    </color>
+        >#FF0000</color>
     <color
         name="color_status_done"
-        >
-        #04D5C1
-    </color>
+        >#31FF00</color>
 </resources>

@@ -7,17 +7,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.database
 import dev.hmr.kanban.R
 import dev.hmr.kanban.data.model.Status
 import dev.hmr.kanban.data.model.Task
 import dev.hmr.kanban.databinding.FragmentFormTaskBinding
+import dev.hmr.kanban.util.FirebaseHelper
 import dev.hmr.kanban.util.initToolbar
 import dev.hmr.kanban.util.showBottomSheet
 
@@ -30,10 +27,10 @@ class FormTaskFragment : Fragment() {
     private var newTask: Boolean = true
     private var status: Status = Status.TODO
 
-    private lateinit var reference: DatabaseReference
-    private lateinit var auth: FirebaseAuth
-
     private val args: FormTaskFragmentArgs by navArgs()
+
+    private val viewModel: TaskViewModel by activityViewModels<TaskViewModel>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,9 +46,6 @@ class FormTaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        this.auth = Firebase.auth
-        this.reference = Firebase.database.reference
 
         this.initToolbar(this.binding.toolbar)
 
@@ -100,9 +94,17 @@ class FormTaskFragment : Fragment() {
     }
 
     private fun saveTask() {
-        reference
+        val userId = FirebaseHelper.getIdUser()
+        if (userId == null) {
+            showBottomSheet(message = "Ocorreu um erro! Por favor tente novamente mais tarde.")
+            return
+        }
+
+        binding.progressBar.isVisible = true
+
+        FirebaseHelper.getDatabase()
             .child("task")
-            .child(auth.currentUser?.uid ?: "")
+            .child(FirebaseHelper.getAuth().currentUser?.uid ?: "")
             .child(task.id)
             .setValue(task).addOnCompleteListener { result ->
                 if (result.isSuccessful) {
@@ -121,7 +123,9 @@ class FormTaskFragment : Fragment() {
                             Toast.LENGTH_SHORT
                         ).show()
 
+                        this.viewModel.setUpdateTask(task)
                         binding.progressBar.isVisible = false
+                        findNavController().popBackStack()
                     }
                 } else {
                     binding.progressBar.isVisible = false
@@ -146,7 +150,6 @@ class FormTaskFragment : Fragment() {
 
         if(this.newTask) {
             this.task = Task()
-            this.task.id = this.reference.database.reference.push().key ?: ""
         }
 
         this.task.description = descricao

@@ -1,5 +1,8 @@
 package dev.hmr.kanban.util
 
+import android.app.Activity
+import android.content.Context
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -41,4 +44,16 @@ fun Fragment.showBottomSheet(
 
     bottomSheetDialog.setContentView(binding.root)
     bottomSheetDialog.show()
+}
+
+fun Activity.hideKeyboard() {
+    val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+    currentFocus?.let { view ->
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+}
+
+fun Fragment.hideKeyboard() {
+    view?.let { activity?.hideKeyboard() }
 }

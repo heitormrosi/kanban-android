@@ -8,9 +8,10 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import dev.hmr.kanban.R
 import dev.hmr.kanban.databinding.FragmentRegisterBinding
+import dev.hmr.kanban.util.FirebaseHelper
+import dev.hmr.kanban.util.hideKeyboard
 import dev.hmr.kanban.util.initToolbar
 import dev.hmr.kanban.util.showBottomSheet
 
@@ -18,8 +19,6 @@ import dev.hmr.kanban.util.showBottomSheet
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -32,8 +31,6 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        this.auth = FirebaseAuth.getInstance()
 
         initToolbar(this.binding.toolbar)
         initListeners()
@@ -67,6 +64,8 @@ class RegisterFragment : Fragment() {
             return
         }
 
+        hideKeyboard()
+
         this.binding.registeringProgressBar.isVisible = true
 
         registerUser(email, senha)
@@ -74,17 +73,13 @@ class RegisterFragment : Fragment() {
 
     private fun registerUser(email: String, password: String) {
         try {
-            auth.createUserWithEmailAndPassword(email, password)
+            FirebaseHelper.getAuth().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     this.binding.registeringProgressBar.isVisible = false
                     if (task.isSuccessful) {
                         findNavController().navigate(R.id.action_global_homeFragment)
                     } else {
-                        Toast.makeText(
-                            requireContext(),
-                            task.exception?.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        showBottomSheet(message = getString(FirebaseHelper.validError(error = task.exception?.message.toString())))
                     }
                 }
         } catch (e: Exception) {
