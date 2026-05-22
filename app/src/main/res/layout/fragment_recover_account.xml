@@ -82,6 +82,12 @@
                 android:indeterminateTint="@color/white"
                 android:visibility="invisible"
                 tools:visibility="visible" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Heitor Moura Rosi"
+                android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>
 

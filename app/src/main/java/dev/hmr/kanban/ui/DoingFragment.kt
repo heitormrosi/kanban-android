@@ -20,7 +20,6 @@ import dev.hmr.kanban.databinding.FragmentDoingBinding
 import dev.hmr.kanban.ui.adapter.TaskAdapter
 import dev.hmr.kanban.util.FirebaseHelper
 import dev.hmr.kanban.util.showBottomSheet
-import kotlin.getValue
 
 
 class DoingFragment : Fragment() {
